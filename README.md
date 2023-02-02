@@ -16,7 +16,7 @@ The repository should contain the following folders:
 
 **Note**: add the `.mat` file in a `bio482_miniproject/data` folder.
 
-### Installation
+### Installation and usage
 
 1. If you're using **MATLAB**:
   - Add the `/matlab` folder to your MATLAB path to run the code.
@@ -26,7 +26,7 @@ The repository should contain the following folders:
   - Install the provided "bio482" conda environment: `conda install env.yml`.
   - Close terminal to make the conda environment effective.
   
-### Working on the project
+  Then, to work on the project:
   - Open a terminal and activate the environment: `conda activate bio482`.
   - Go to `python/notebooks` and open a terminal, then run: `jupyter notebook`.
   - Open notebooks to start working on the project.
