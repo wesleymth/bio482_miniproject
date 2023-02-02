@@ -1,9 +1,10 @@
-# bio482_miniproject
-Repository for the data analysis miniproject of the course Neuroscience: cellular and circuit mechanisms (BIO-482). 
+# BIO-482 Miniproject  
 
+Repository for the data analysis miniproject of the course Neuroscience: cellular and circuit mechanisms (BIO-482), EPFL. 
 This repository contains a MATLAB and python version of this project, as well as associated functions used for computations.
 
-## Installation
+# Setting up
+## Download
 - Clone `git clone ...` or download as zip file this repository (green button).
 - Download data at the provided link.
 
@@ -15,7 +16,8 @@ The repository should contain the following folders:
 
 **Note**: add the `.mat` file in a `data` folder that is the same level as `doc`.
 
-## How to set up
+## Installation and running the code
+
 1. If you're using MATLAB:
   - Add the `/matlab` folder to your MATLAB path to run the code.
 2. If you're using Python:
@@ -25,5 +27,7 @@ The repository should contain the following folders:
   - Close terminal to make the conda environment effective.
   - Go to `python/notebooks` and open a terminal, then run: `jupyter notebook`.
   - Open notebooks to start the project.
+  
+  _fin_ 
  
 
