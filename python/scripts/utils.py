@@ -7,11 +7,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def sorter(column):
-    """ Custom cell-type sorting. """
-    reorder = ['EXC','PV','VIP','SST']
-    cat = pd.Categorical(column, categories=reorder, ordered=True)
-    return pd.Series(cat)
 
 def remove_top_right_frame(ax):
     """ Remove figure borders for style. """
@@ -43,12 +38,11 @@ def plot_avg_mean_fft(ax, fft_matrix, sr, cell_class, color):
     fft_sem = np.nanstd(fft_matrix, 1) / np.sqrt(fft_matrix.shape[1])
     freq = np.arange(fft_matrix.shape[0]) * sr / 2 / fft_matrix.shape[0]
 
-
     ax.semilogx(freq, fft_mean, color, label=cell_class)
     ax.semilogx(freq, fft_mean + fft_sem, color, linewidth=.5)
     ax.semilogx(freq, fft_mean - fft_sem, color, linewidth=.5)
 
-    return
+    return ax
 
 
 def function_PSTH(AP_avg, SR_Vm, Pre_Window, Post_Window, bin_size):
