@@ -1,6 +1,6 @@
 # BIO-482 Miniproject  
 
-Repository for the data analysis miniproject of the course Neuroscience: cellular and circuit mechanisms (BIO-482), EPFL. 
+Repository for the data analysis miniproject of the course _Neuroscience: cellular and circuit mechanisms_ (BIO-482), EPFL. 
 
 This repository contains a MATLAB and python version of this project, as well as associated functions used for computations.
 
