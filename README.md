@@ -26,7 +26,7 @@ The repository should contain the following folders:
   - Install the provided "bio482" conda environment: `conda install env.yml`.
   - Close terminal to make the conda environment effective.
   
-  Then, to work on the project:
+    Then, to work on the project:
   - Open a terminal and activate the environment: `conda activate bio482`.
   - Go to `python/notebooks` and open a terminal, then run: `jupyter notebook`.
   - Open notebooks to start working on the project.
