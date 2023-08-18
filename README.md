@@ -2,7 +2,7 @@
 
 Repository for the data analysis miniproject of the course _Neuroscience: cellular and circuit mechanisms_ (BIO-482), EPFL. 
 
-This repository contains a MATLAB (`matlab`) and Python (`python`) version of this project, as well as associated functions used for computations.
+This repository contains a MATLAB and Python version of this project, as well as associated functions used for computations.
 
 ## Setting up
 ### Download
