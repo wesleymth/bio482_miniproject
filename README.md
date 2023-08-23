@@ -20,6 +20,10 @@ The repository should contain the following folders:
 
 1. **If you're using MATLAB**:
   - Add the `/matlab` folder to your MATLAB path to run the code.
+  - Make sure you also have installed the following:
+    - Signal Processing Toolbox
+    - MATLAB Curve Fitting Toolbox
+    - Statistics and Machine Learning Toolbox
 2. **If you're using Python**:
   - You need to have Anaconda installed for your system: [install anaconda here](https://docs.anaconda.com/anaconda/install/index.html). 
   - Once Anaconda is installed, open a terminal and go to the `python` directory of the project.
