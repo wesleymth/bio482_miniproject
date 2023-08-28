@@ -26,10 +26,11 @@ The repository should contain the following folders:
     - Statistics and Machine Learning Toolbox
 2. **If you're using Python**:
   - You need to have Anaconda installed for your system: [install anaconda here](https://docs.anaconda.com/anaconda/install/index.html). 
-  - Once Anaconda is installed, open a terminal and go to the `python` directory of the project.
-  - Install the provided "bio482" conda environment: `conda env create -f env.yml`.
+  - Once Anaconda is installed, open a terminal and install a "bio482" conda environment:
+           `conda create -n bio482 numpy scipy matplotlib seaborn h5py pandas jupyterlab statsmodels`
   - Close terminal to make the conda environment effective.
-  
+  - Make sure the environment is installed. Open a terminal: `conda env list`. The "bio482" environment should be there.
+
     Then, to work on the project:
   - Go to `python` and open a terminal
   - Activate the environment: `conda activate bio482`.
