@@ -10,8 +10,7 @@ import matplotlib.pyplot as plt
 
 def remove_top_right_frame(ax):
     """ Remove figure borders for style. """
-    ax.spines.top.set_visible(False)
-    ax.spines.right.set_visible(False)
+    ax.spines[['top', 'right']].set_visible(False)
     return ax
 
 def rand_jitter(arr):
