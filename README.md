@@ -27,7 +27,7 @@ The repository should contain the following folders:
 2. **If you're using Python**:
   - You need to have Anaconda installed for your system: [install anaconda here](https://docs.anaconda.com/anaconda/install/index.html). 
   - Once Anaconda is installed, open a terminal and install a "bio482" conda environment:
-           `conda create -n bio482 numpy scipy matplotlib seaborn h5py pandas jupyterlab statsmodels`
+           `conda create -n bio482 numpy scipy matplotlib seaborn h5py pandas jupyterlab statsmodels scikit-learn`
   - Close terminal to make the conda environment effective.
   - Make sure the environment is installed. Open a terminal: `conda env list`. The "bio482" environment should be there.
 
