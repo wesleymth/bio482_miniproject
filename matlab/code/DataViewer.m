@@ -240,7 +240,7 @@ if ispc
     MouseFileName = dir(MatlabFile);
     load([currentFolder '\Data\' MouseFileName.name]);
 elseif ismac
-    MatlabFile = fullfile([currentFolder '/Data' '/*.mat']);
+    MatlabFile = fullfile([currentFolder'/Data' '/*.mat']);
     MouseFileName = dir(MatlabFile);
     load([currentFolder '/Data/' MouseFileName.name]);
 end

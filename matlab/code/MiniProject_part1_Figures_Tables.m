@@ -59,8 +59,6 @@ writetable(Mean_Table_Part1, Expression)
 
 %% Conpare mean Firing Rates across cells
 
-clc
-
 Tobeplotted_EXC=[];
 Tobeplotted_PV=[];
 Tobeplotted_VIP=[];
@@ -115,10 +113,30 @@ print('-painters', '-djpeg', Expression)
 
 disp('DONE')
 pause(0.5)
+%% Stats comparison between cell types
+
+Group_All=[];
+ToBeTested=[];
+
+KW_p_Tested=[];
+NPMC_Tested=[];
+
+Group_All=[ones(1,length(Tobeplotted_EXC(:,2))) repmat(2,1,length(Tobeplotted_PV(:,2))) repmat(3,1,length(Tobeplotted_VIP(:,2))) repmat(4,1,length(Tobeplotted_SST(:,2)))]';
+ToBeTested=vertcat(Tobeplotted_EXC(:,2), Tobeplotted_PV(:,2), Tobeplotted_VIP(:,2), Tobeplotted_SST(:,2));
+
+stats=[];
+[KW_p_Tested,tbl,stats] = kruskalwallis(ToBeTested, Group_All,'off');
+NPMC_Tested = multcompare(stats, 'Display','off');
+
+disp('Compare mean firing rate between cell types')
+disp(['P value EXC vs PV =' num2str(NPMC_Tested(1,6))]);
+disp(['P value EXC vs VIP =' num2str(NPMC_Tested(2,6))]);
+disp(['P value EXC vs SST =' num2str(NPMC_Tested(3,6))]);
+disp(['P value PV vs VIP =' num2str(NPMC_Tested(4,6))]);
+disp(['P value PV vs SST =' num2str(NPMC_Tested(5,6))]);
+disp(['P value VIP vs SST =' num2str(NPMC_Tested(6,6))]);
 
 %% Conpare mean AP duration across cells
-
-clc
 
 Tobeplotted_EXC=[];
 Tobeplotted_PV=[];
@@ -175,9 +193,30 @@ print('-painters', '-djpeg', Expression)
 disp('DONE')
 pause(0.5)
 
-%% Conpare mean Firing rate vs AP duration across cells
+%% Stats comparison between cell types
 
-clc
+Group_All=[];
+ToBeTested=[];
+
+KW_p_Tested=[];
+NPMC_Tested=[];
+
+Group_All=[ones(1,length(Tobeplotted_EXC(:,2))) repmat(2,1,length(Tobeplotted_PV(:,2))) repmat(3,1,length(Tobeplotted_VIP(:,2))) repmat(4,1,length(Tobeplotted_SST(:,2)))]';
+ToBeTested=vertcat(Tobeplotted_EXC(:,2), Tobeplotted_PV(:,2), Tobeplotted_VIP(:,2), Tobeplotted_SST(:,2));
+
+stats=[];
+[KW_p_Tested,tbl,stats] = kruskalwallis(ToBeTested, Group_All,'off');
+NPMC_Tested = multcompare(stats, 'Display','off');
+
+disp('Compare AP duration between cell types')
+disp(['P value EXC vs PV =' num2str(NPMC_Tested(1,6))]);
+disp(['P value EXC vs VIP =' num2str(NPMC_Tested(2,6))]);
+disp(['P value EXC vs SST =' num2str(NPMC_Tested(3,6))]);
+disp(['P value PV vs VIP =' num2str(NPMC_Tested(4,6))]);
+disp(['P value PV vs SST =' num2str(NPMC_Tested(5,6))]);
+disp(['P value VIP vs SST =' num2str(NPMC_Tested(6,6))]);
+
+%% Conpare mean Firing rate vs AP duration across cells
 
 Tobeplotted_EXC=[];
 Tobeplotted_PV=[];
@@ -258,8 +297,6 @@ pause(0.5)
 
 %% Conpare mean Vm across cells
 
-clc
-
 Tobeplotted_EXC=[];
 Tobeplotted_PV=[];
 Tobeplotted_VIP=[];
@@ -315,9 +352,30 @@ print('-painters', '-djpeg', Expression)
 disp('DONE')
 pause(0.5)
 
-%% Conpare mean Vm SD across cells
+%% Stats comparison between cell types
 
-clc
+Group_All=[];
+ToBeTested=[];
+
+KW_p_Tested=[];
+NPMC_Tested=[];
+
+Group_All=[ones(1,length(Tobeplotted_EXC(:,2))) repmat(2,1,length(Tobeplotted_PV(:,2))) repmat(3,1,length(Tobeplotted_VIP(:,2))) repmat(4,1,length(Tobeplotted_SST(:,2)))]';
+ToBeTested=vertcat(Tobeplotted_EXC(:,2), Tobeplotted_PV(:,2), Tobeplotted_VIP(:,2), Tobeplotted_SST(:,2));
+
+stats=[];
+[KW_p_Tested,tbl,stats] = kruskalwallis(ToBeTested, Group_All,'off');
+NPMC_Tested = multcompare(stats, 'Display','off');
+
+disp('Compare mean Vm between cell types')
+disp(['P value EXC vs PV =' num2str(NPMC_Tested(1,6))]);
+disp(['P value EXC vs VIP =' num2str(NPMC_Tested(2,6))]);
+disp(['P value EXC vs SST =' num2str(NPMC_Tested(3,6))]);
+disp(['P value PV vs VIP =' num2str(NPMC_Tested(4,6))]);
+disp(['P value PV vs SST =' num2str(NPMC_Tested(5,6))]);
+disp(['P value VIP vs SST =' num2str(NPMC_Tested(6,6))]);
+
+%% Conpare mean Vm SD across cells
 
 Tobeplotted_EXC=[];
 Tobeplotted_PV=[];
@@ -374,10 +432,35 @@ print('-painters', '-djpeg', Expression)
 disp('DONE')
 pause(0.5)
 
+%% Stats comparison between cell types
+
+Group_All=[];
+ToBeTested=[];
+
+KW_p_Tested=[];
+NPMC_Tested=[];
+
+Group_All=[ones(1,length(Tobeplotted_EXC(:,2))) repmat(2,1,length(Tobeplotted_PV(:,2))) repmat(3,1,length(Tobeplotted_VIP(:,2))) repmat(4,1,length(Tobeplotted_SST(:,2)))]';
+ToBeTested=vertcat(Tobeplotted_EXC(:,2), Tobeplotted_PV(:,2), Tobeplotted_VIP(:,2), Tobeplotted_SST(:,2));
+
+stats=[];
+[KW_p_Tested,tbl,stats] = kruskalwallis(ToBeTested, Group_All,'off');
+NPMC_Tested = multcompare(stats, 'Display','off');
+
+disp('Compare Vm SD between cell types')
+disp(['P value EXC vs PV =' num2str(NPMC_Tested(1,6))]);
+disp(['P value EXC vs VIP =' num2str(NPMC_Tested(2,6))]);
+disp(['P value EXC vs SST =' num2str(NPMC_Tested(3,6))]);
+disp(['P value PV vs VIP =' num2str(NPMC_Tested(4,6))]);
+disp(['P value PV vs SST =' num2str(NPMC_Tested(5,6))]);
+disp(['P value VIP vs SST =' num2str(NPMC_Tested(6,6))]);
+
+
 %% Plot GRD Average FFT for each cell class
 
 SR_Vm=result.EXC.SR_Vm(1,1);
 color=[0 0 0; 1 0 0; 0 0 1; 1 0.5 0];
+
 
 figure
 
@@ -392,6 +475,7 @@ for i=1:4
     end
         
     Function_Plot_Mean_FFT(FFT_Mtrx, SR_Vm, color(i,:))
+    
     
     eval(['GRD_AVG_FFT_' cell2mat(Cell_Class_List(i)) '_Mean=FFT_Mean;']);
     eval(['GRD_AVG_FFT_' cell2mat(Cell_Class_List(i)) '_sem=FFT_sem;']);
@@ -423,7 +507,6 @@ pause(0.5)
 
 %% Conpare mean LF FFT across cells
 
-clc
 
 Tobeplotted_EXC=[];
 Tobeplotted_PV=[];
@@ -480,9 +563,31 @@ print('-painters', '-djpeg', Expression)
 disp('DONE')
 pause(0.5)
 
-%% Conpare mean Firing rate vs AP duration across cells
+%% Stats comparison between cell types
 
-clc
+Group_All=[];
+ToBeTested=[];
+
+KW_p_Tested=[];
+NPMC_Tested=[];
+
+Group_All=[ones(1,length(Tobeplotted_EXC(:,2))) repmat(2,1,length(Tobeplotted_PV(:,2))) repmat(3,1,length(Tobeplotted_VIP(:,2))) repmat(4,1,length(Tobeplotted_SST(:,2)))]';
+ToBeTested=vertcat(Tobeplotted_EXC(:,2), Tobeplotted_PV(:,2), Tobeplotted_VIP(:,2), Tobeplotted_SST(:,2));
+
+stats=[];
+[KW_p_Tested,tbl,stats] = kruskalwallis(ToBeTested, Group_All,'off');
+NPMC_Tested = multcompare(stats, 'Display','off');
+
+disp('Compare LF FFT amplitude between cell types')
+disp(['P value EXC vs PV =' num2str(NPMC_Tested(1,6))]);
+disp(['P value EXC vs VIP =' num2str(NPMC_Tested(2,6))]);
+disp(['P value EXC vs SST =' num2str(NPMC_Tested(3,6))]);
+disp(['P value PV vs VIP =' num2str(NPMC_Tested(4,6))]);
+disp(['P value PV vs SST =' num2str(NPMC_Tested(5,6))]);
+disp(['P value VIP vs SST =' num2str(NPMC_Tested(6,6))]);
+
+
+%% Conpare mean Firing rate vs AP duration across cells
 
 Tobeplotted_EXC=[];
 Tobeplotted_PV=[];

@@ -23,8 +23,8 @@ Sweep_Type='active touch'; % or 'active touch'
 Cell_Types={'EXC', 'PV', 'VIP', 'SST'};
 
 
-Pre_Window=0.5; % time before whisking onset (s)
-Post_Window=0.5; % time after whisking onset (s)
+Pre_Window=0.2; % time before whisking onset (s)
+Post_Window=0.2; % time after whisking onset (s)
 Min_Event_Dur=0.0001; % minimal duration of whisking episode to be considered
 Min_ITI=0.2; % minimal interval between 2 consecutive whisking episode (s)
 Min_Numb_Trial=3; % minimal number of trial

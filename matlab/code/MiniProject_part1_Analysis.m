@@ -34,6 +34,47 @@ for thisField = 1:length(myFields)
     dataSelect.(cell2mat(myFields(thisField))) = Data.(cell2mat(myFields(thisField)))(strcmp(Data.Sweep_Type, Sweep_Type),:);
 end
 
+%% Print example Vm with AP peak and threshold
+
+sweep=120;
+disp(['Cell_ID = ', Data.Cell_ID{sweep}])
+
+MembranePotential=[];
+SR_Vm=[];
+AP_Vm_Deriv_Thrs=[];
+AP_Param=[];
+Rec_Dur=[];
+
+MembranePotential=Data.Sweep_MembranePotential{sweep,1};
+SR_Vm=Data.Sweep_MembranePotential_SamplingRate(sweep,1);
+AP_Vm_Deriv_Thrs=Data.Cell_APThreshold_Slope(1,1);
+[AP_Param]=Function_Detect_APs(MembranePotential, SR_Vm, AP_Vm_Deriv_Thrs);
+Rec_Dur=length(MembranePotential)/SR_Vm;
+time_vect=linspace(0, Rec_Dur, length(MembranePotential));
+
+figure('Position', [100 400 1400 400])
+plot(time_vect, MembranePotential, 'Color', [0 0 0])
+hold on
+plot(AP_Param(:,1), AP_Param(:,2), 'o', 'Color', [1 0 0])
+hold on
+plot(AP_Param(:,3), AP_Param(:,4), 'o', 'Color', [0 0 1])
+xlim([0 10])
+xlabel('Time (s)')
+ylabel('Vm (V)')
+title(['cell ID = ' Data.Cell_ID{sweep}])
+%% SAVE THE RESULT FIGURES
+
+disp('Saving Figure')
+pause(0.5)
+
+Expression=[PathSaveFigures filesep '0_Example_Vm_AP_Thresholds'];
+
+print('-painters', '-depsc', Expression)
+print('-painters', '-djpeg', Expression)
+
+disp('DONE')
+pause(0.5)
+
 %% Loop through Cell types
 
 for tp=1:4
@@ -115,6 +156,13 @@ for tp=1:4
             % subthreshold Vm
             
             if ~isempty(AP_Param)
+
+                if min(AP_Param(:,6))<0
+
+                    disp(['Error AP duration, Cell=', data1Cell.Cell_ID{1,1}])
+
+                end
+
                 Vm_Sub=[];
          
                 AP_Thrs_Times=AP_Param(:,1);

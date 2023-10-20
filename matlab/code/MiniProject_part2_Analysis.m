@@ -163,7 +163,7 @@ for tp=1:4
                 AP_lev1=round((AP_FR_Times(t,1)+Pre_Window)*SR_Vm+1);
                 AP_lev2=round((AP_FR_Times(t,2)+Pre_Window)*SR_Vm);
                 
-                result.(cell2mat(Cell_Types(tp))).AP_FiringRate(c,t)=sum(AP_avg(1,AP_lev1:AP_lev2)) / (AP_FR_Times(t,2)-AP_FR_Times(t,1));
+                result.(cell2mat(Cell_Types(tp))).AP_FiringRate(c,t)=sum(AP_avg(1,AP_lev1:AP_lev2))/(AP_FR_Times(t,2)-AP_FR_Times(t,1));
                 
             end
             
