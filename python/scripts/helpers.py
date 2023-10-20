@@ -43,8 +43,8 @@ def Function_Detect_APs(MembranePotential, SR_Vm, Vm_Deriv_Thrs):
                         Ind = AP_Thrs_Index[i]
                         pt2 = AP_Index
                         # we define a time window for the AP ...
-                        pt1 = int(pt2 - (0.002 * SR_Vm))  # ... 2 ms before the peak ...
-                        pt3 = int(pt2 + (0.003 * SR_Vm))  # ... and 3 ms after the peak.
+                        pt1 = int(AP_Thrs_Index[i])  # ... AP threshold index ...
+                        pt3 = int(pt2 + (0.005 * SR_Vm))  # ... and 3 ms after the peak.
                         if (pt1 > 0 & pt3 < len(MembranePotential)):
                             Vm_HalfAmp = MembranePotential[Ind] + AP_Amp / 2  # Vm at half amplitude
                             sAP_Seg = MembranePotential[pt1:pt3]  # cut a segment of the VM that contains the AP
@@ -52,9 +52,11 @@ def Function_Detect_APs(MembranePotential, SR_Vm, Vm_Deriv_Thrs):
                             sAP_OnOff = np.diff(np.divide(sAP_Seg, np.abs(sAP_Seg)))  # compute the binary signal
                             sAP_Indmax = np.argmax(sAP_OnOff)  # identify index begening AP at half amplitude
                             sAP_Indmin = np.argmin(sAP_OnOff)  # identify index end AP at half amplitude
+                            
+                            if np.min(sAP_OnOff)>-1:
+                                sAP_Indmin=len(sAP_Seg)
 
-                            AP_Param_Output[AP_cnt, 5] = ((
-                                                                      sAP_Indmin - sAP_Indmax) / SR_Vm) * 1000  # compute duration at half-amplitude
+                            AP_Param_Output[AP_cnt, 5] = ((sAP_Indmin - sAP_Indmax) / SR_Vm) * 1000  # compute duration at half-amplitude
                         else:
                             AP_Param_Output[AP_cnt, 5] = np.nan
                         AP_cnt = AP_cnt + 1
@@ -314,7 +316,7 @@ def Function_Times2Vect(AP_times, SR_Vm, Length_Vect):
     return AP_vect
 
 
-def Function_Event_Triggered_Signal(membrane_potential, sampling_rate, event_times,
+def Function_Event_Triggered_Signal(Signal, sampling_rate, event_times,
                                     pre_window, post_window, min_event_dur, min_iti):
     if len(event_times.shape) == 1:
         event_times = event_times[None]
@@ -322,7 +324,7 @@ def Function_Event_Triggered_Signal(membrane_potential, sampling_rate, event_tim
         event_times = event_times[0]
 
     time_length = int(np.floor((pre_window + post_window) * sampling_rate))
-    vm_out = []
+    Sign_out = []
     for i, event in enumerate(event_times):
 
         event_dur = event[1] - event[0]
@@ -332,10 +334,66 @@ def Function_Event_Triggered_Signal(membrane_potential, sampling_rate, event_tim
             iti = event_times[i][0] - event_times[i - 1][1]
 
         if event_dur > min_event_dur and iti > min_iti:
-            pt1 = int(np.floor((event[0] - pre_window) * sampling_rate)) + 2
-            pt2 = pt1 + time_length + 2
-            if pt1 > 0 and pt2 < len(membrane_potential) - 1:
-                vm_out += [membrane_potential[pt1:pt2]]
-    if vm_out == []:
+            pt1 = int(np.floor((event[0] - pre_window) * sampling_rate))
+            pt2 = pt1 + time_length
+            if pt1 > 0 and pt2 < len(Signal) - 1:
+                Sign_out += [Signal[pt1:pt2]]
+    if Sign_out == []:
         return -1
-    return np.vstack(vm_out).T
+    return np.vstack(Sign_out).T
+
+
+def Function_PSTH(AP_avg, SR_Vm, Pre_Window, Post_Window, bin_size):
+  
+    """     This function generates a peri-stimulus time histogram (PSTH) based on the averaged AP signal around event time 
+
+     INPUTS:
+     AP_avg = vector of the averaged AP signal around event onset time
+     SR_Vm = Sampling rate of the membrane potential (sample / s)
+     Pre_Window = time before event onset time (s)
+     Post_Window = time after event onset time (s)
+     bin_size = size of the bins to compute the PSTH (s)
+
+     OUPUT:
+     AP_PSTH = matrix containing the time vector (column 1) (s) and the firing
+     rate (column 2) (Hz) for each time bin."""
+
+
+    AP_PSTH=[]
+    AP_PSTH_pre=[]
+    AP_PSTH_post=[]
+
+    bin_pt=np.round(bin_size*SR_Vm)
+
+    pt0=int(np.floor(Pre_Window*SR_Vm))
+    pt2=pt0
+    pt_min=int(pt0-np.floor(pt0/bin_pt)*bin_pt+1)
+
+    cnt=0
+
+    while(pt2>pt_min):
+
+        pt1=int(pt0-(bin_pt*(cnt)))
+        pt2=int(pt1-bin_pt+1)
+        AP_PSTH_pre.append([-1*bin_size*(cnt+1),np.sum(AP_avg[pt2:pt1])/bin_size])
+        cnt+=1
+
+
+
+    pt0=int(np.floor(Pre_Window*SR_Vm))
+    pt2=pt0
+    pt_max=int(pt0+np.floor((Post_Window*SR_Vm)/bin_pt)*bin_pt)
+
+    cnt=0
+
+    while(pt2<pt_max):
+
+        pt1=int(pt0+(bin_pt*cnt))
+        pt2=int(pt1+bin_pt)
+        AP_PSTH_post.append([bin_size*(cnt),np.sum(AP_avg[pt1:pt2])/bin_size])
+        cnt+=1
+
+    AP_PSTH=np.concatenate((AP_PSTH_pre, AP_PSTH_post), axis=0)
+    # AP_PSTH=np.sort(AP_PSTH,axis=0)
+    AP_PSTH=AP_PSTH[AP_PSTH[:, 0].argsort(),:]
+    return AP_PSTH
