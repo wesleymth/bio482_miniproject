@@ -68,8 +68,8 @@ if isempty(AP_Thrs_Index)==0
                     Ind=AP_Thrs_Index(i,1);
                     pt2=AP_Index;
                     % we define a time window for the AP ...
-                    pt1=pt2-0.002*SR_Vm; % ... 2 ms before the peak ...
-                    pt3=pt2+0.003*SR_Vm; % ... and 3 ms after the peak.
+                    pt1= AP_Thrs_Index(i,1);
+                    pt3=pt2+0.005*SR_Vm; % ... and 5 ms after the peak.
                     
                     if pt1>0 && pt3<length(MembranePotential)
                                               
@@ -81,10 +81,14 @@ if isempty(AP_Thrs_Index)==0
                         
                         [sAP_Max, sAP_Indmax]=max(sAP_OnOff); % identify index begening AP at half amplitude
                         [sAP_Min, sAP_Indmin]=min(sAP_OnOff); % identify index end AP at half amplitude
+
+                        if sAP_Min>-1
+                            sAP_Indmin=length(sAP_Seg);
+                        end
                         
                         AP_Param(AP_cnt,6)=((sAP_Indmin-sAP_Indmax)/SR_Vm)*1000; % compute duration at half-amplitude
                         
-                        
+                                              
                     else
                         AP_Param(AP_cnt,6)=NaN;
                     end

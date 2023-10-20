@@ -35,8 +35,8 @@ for i=1:size(Event_Times, 1)
     
     if Event_Dur> Min_Event_Dur && ITI>Min_ITI
        
-        pt1=floor((Event_Times(i,1)-Pre_Window)*SR); 
-        pt2=pt1+floor((Pre_Window+Post_Window)*SR)-1;
+        pt1=ceil((Event_Times(i,1)-Pre_Window)*SR); 
+        pt2=pt1+ceil((Pre_Window+Post_Window)*SR)-1;
         
         if pt1>0 && pt2<length(Signal)
             
