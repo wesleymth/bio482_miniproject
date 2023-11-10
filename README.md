@@ -37,6 +37,8 @@ The repository should contain the following folders:
   - Then run: `jupyter lab`.
   - Open notebooks to start working on the project.
 
+  - To run the `dataviewer.py`, edit the file by replacing the location of `MiniProjectData.mat`to where your current .mat file is (i.e. full path).
+
 
     **Note about paths**:
     - **MATLAB**: You must add folders to MATLAB's path: Right-click on folder -> Add to path...
