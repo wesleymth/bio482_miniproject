@@ -1,8 +1,11 @@
-# BIO-482 Miniproject  
+# BIO-482 Miniproject :brain: :mouse:	:technologist:	
 
 Repository for the data analysis miniproject of the course _**Neuroscience: cellular and circuit mechanisms**_ (BIO-482), EPFL. 
 
 This repository contains a MATLAB and Python version of this project, as well as associated functions used for computations.
+
+This project is based on the published [dataset of single-cell recordings in awake mice](https://zenodo.org/records/7833080]) previously collected at LSENS, which resulted in the publication 
+[Membrane potential dynamics of excitatory and inhibitory neurons in mouse barrel cortex during active whisker sensing](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0287174). 
 
 ## Setting up
 ### Download
