@@ -2,12 +2,35 @@ clc
 clear all
 close all
 
+if ~ exist('Results')
+    
+    mkdir('Results')
+    addpath('Results')
+
+end
+
+
+if ~ exist('SavedFigures')
+    
+    mkdir('SavedFigures')
+    addpath('SavedFigures')
+
+end
+
+if ~ exist('Tables')
+    
+    mkdir('Tables')
+    addpath('Tables')
+
+end
+
+
 % load the datasets
 disp('LOAD Data')
 
 CurrentDir=pwd;
 PathLoadData=[CurrentDir filesep 'Data'];
-PathSaveFigures=[CurrentDir filesep 'Figures'];
+PathSaveFigures=[CurrentDir filesep 'SavedFigures'];
 PathSaveResults=[CurrentDir filesep 'Results'];
 
 datasetName='Data_Bio482.mat';
@@ -77,7 +100,7 @@ pause(0.5)
 
 %% Loop through Cell types
 
-for tp=1:4
+for tp=1:size(Cell_Types,2) % loop through the cell types
     
     % select one cell type
     
@@ -91,7 +114,7 @@ for tp=1:4
     
     % Loop through Cells
     
-    for c=1:size(Cell_List,1)
+    for c=1:size(Cell_List,1) % loop through the cells from 1 cell type
         
         % select 1 cell
         data1Cell=[];
@@ -122,7 +145,7 @@ for tp=1:4
         
         % Loop through sweeps for 1 cell
         
-        for sweep=1:size(data1Cell.Sweep_Counter,1)
+        for sweep=1:size(data1Cell.Sweep_Counter,1) % loop through the sweeps from 1 cell
             
             % get the data to be processed from the data structure
             

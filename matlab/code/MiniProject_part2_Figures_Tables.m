@@ -2,12 +2,33 @@ clc
 clear all
 close all
 
+if ~ exist('Results')
+    
+    mkdir('Results')
+    addpath('Results')
+
+end
+
+if ~ exist('SavedFigures')
+    
+    mkdir('SavedFigures')
+    addpath('SavedFigures')
+
+end
+
+if ~ exist('Tables')
+    
+    mkdir('Tables')
+    addpath('Tables')
+
+end
+
 % load the datasets
 disp('LOAD Data')
 
 CurrentDir=pwd;
 PathLoadData=[CurrentDir filesep 'Results'];
-PathSaveFigures=[CurrentDir filesep 'Figures'];
+PathSaveFigures=[CurrentDir filesep 'SavedFigures'];
 PathSaveTables=[CurrentDir filesep 'Tables'];
 PathSaveResults=[CurrentDir filesep 'Results'];
 
@@ -19,6 +40,8 @@ disp('Data LOADED')
 pause(0.5)
 
 %% Parameters
+
+Cell_Types={'EXC', 'PV', 'VIP', 'SST'};
 
 t_bef=-0.5;
 t_aft=0.5;
@@ -54,7 +77,7 @@ Mean_Table_Part2=[];
 
 Cell_Types={'EXC', 'PV', 'VIP', 'SST'};
 
-for i=1:4
+for i=1:size(Cell_Types,2) % loop through the cell types
     
     CellClassMeans.Cell_Class{i,1}=Cell_Types{i};
     

@@ -2,12 +2,37 @@ clc
 clear all
 close all
 
+if ~ exist('Results')
+    
+    mkdir('Results')
+    addpath('Results')
+
+end
+
+if ~ exist('SavedFigures')
+    
+    mkdir('SavedFigures')
+    addpath('SavedFigures')
+
+end
+
+if ~ exist('Tables')
+    
+    mkdir('Tables')
+    addpath('Tables')
+
+end
+
+clc
+clear all
+close all
+
 % load the datasets
 disp('LOAD Data')
 
 CurrentDir=pwd;
 PathLoadData=[CurrentDir filesep 'Data'];
-PathSaveFigures=[CurrentDir filesep 'Figures'];
+PathSaveFigures=[CurrentDir filesep 'SavedFigures'];
 PathSaveResults=[CurrentDir filesep 'Results'];
 PathSaveTables=[CurrentDir filesep 'Tables'];
 
@@ -21,6 +46,7 @@ pause(0.5)
 %% Parameters
 
 Time_Window=2; % time window used to compute meam Vm, Vm SD and Vm FFT 
+Cell_Types={'EXC', 'PV', 'VIP', 'SST'};
 
 %% Make a table for average across cell class
 
@@ -29,7 +55,7 @@ Mean_Table_Part1=[];
 
 Cell_Class_List={'EXC', 'PV', 'VIP', 'SST'};
 
-for i=1:4
+for i=1:size(Cell_Types,2) % loop through the cell types
     
     CellClassMeans.Cell_Class{i,1}=(cell2mat(Cell_Class_List(i))); 
     CellClassMeans.Firing_Rate_Mean(i,1)=mean(result.(cell2mat(Cell_Class_List(i))).Firing_Rate(:,1), 'omitnan')
